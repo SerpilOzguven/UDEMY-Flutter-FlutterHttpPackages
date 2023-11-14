@@ -9,14 +9,14 @@ class TodoService{
   static const _basicUrl ='https://jsonplaceholder.typicode.com/';
 
   static Future getTodos()async{
-    var tempList = [];
+    var tempList = <TodoModel>[];
     var response = await http.get(Uri.parse('${_basicUrl}todos'));
     if(response.statusCode == 200){
       var jsonData = json.decode(response.body);
       for (var item in jsonData){
-        tempList.add(item);
+        tempList.add(TodoModel.fromJson(item));
       }
-      print(tempList[0]['userId']);
+      print(tempList[0].userId);
 
 
      }else{
