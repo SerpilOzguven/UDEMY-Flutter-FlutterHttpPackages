@@ -9,11 +9,21 @@ class TodoService{
   static const _basicUrl ='https://jsonplaceholder.typicode.com/';
 
   static Future getTodos()async{
-     var response = await http.get(Uri.parse('${_basicUrl}todos/1'));
-     if(response.statusCode == 200){
+    var tempList = [];
+    var response = await http.get(Uri.parse('${_basicUrl}todos'));
+    if(response.statusCode == 200){
+      var jsonData = json.decode(response.body);
+      for (var item in jsonData){
+        tempList.add(item);
+      }
+      print(tempList[0]['userId']);
+
+
+     }else{
        print(response.body);
-       print(json.decode(response.body));
+       print(response.statusCode);
      }
+
 
   }
 
