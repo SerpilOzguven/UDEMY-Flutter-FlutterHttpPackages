@@ -4,22 +4,22 @@
 
 import 'dart:convert';
 
-TodoModel welcomeFromJson(String str) => TodoModel.fromJson(json.decode(str));
+TodoModel todoModelFromJson(String str) => TodoModel.fromJson(json.decode(str));
 
-String TodoModelToJson(TodoModel data) => json.encode(data.toJson());
+String todoModelToJson(TodoModel data) => json.encode(data.toJson());
 
 class TodoModel {
+  TodoModel({
+    this.userId,
+    this.id,
+    this.title,
+    this.completed,
+  });
+
   int? userId;
   int? id;
   String? title;
   bool? completed;
-
-  TodoModel ({
-    required this.userId,
-    required this.id,
-    required this.title,
-    required this.completed,
-  });
 
   factory TodoModel.fromJson(Map<String, dynamic> json) => TodoModel(
     userId: json["userId"],
@@ -29,9 +29,14 @@ class TodoModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "userId": userId,
-    "id": id,
+    "userId": userId.toString(),
+    "id": id.toString(),
     "title": title,
-    "completed": completed,
+    "completed": completed.toString(),
   };
+
+  Map<String, dynamic> toJsonTitle() => {
+    "title": title
+  };
+
 }
